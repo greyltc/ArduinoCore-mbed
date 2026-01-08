@@ -1,0 +1,62 @@
+diff --git a/connectivity/drivers/emac/TARGET_STM/TARGET_STM32H7/TARGET_OPTA/stm32h7_eth_init.c b/connectivity/drivers/emac/TARGET_STM/TARGET_STM32H7/TARGET_OPTA/stm32h7_eth_init.c
+index 8b9cc8bcd0..dc69d2b69a 100644
+--- a/connectivity/drivers/emac/TARGET_STM/TARGET_STM32H7/TARGET_OPTA/stm32h7_eth_init.c
++++ b/connectivity/drivers/emac/TARGET_STM/TARGET_STM32H7/TARGET_OPTA/stm32h7_eth_init.c
+@@ -35,6 +35,7 @@
+ 
+ #include "stm32h7xx_hal.h"
+ #include "opta_power.h"
++#include "mbed_critical.h"
+ 
+ #define ETH_TX_EN_Pin GPIO_PIN_11
+ #define ETH_TX_EN_GPIO_Port GPIOG
+diff --git a/connectivity/drivers/wifi/COMPONENT_WHD/whd-bsp-integration/cy_network_buffer.c b/connectivity/drivers/wifi/COMPONENT_WHD/whd-bsp-integration/cy_network_buffer.c
+index 2e1ea4c90d..04140b5eb8 100755
+--- a/connectivity/drivers/wifi/COMPONENT_WHD/whd-bsp-integration/cy_network_buffer.c
++++ b/connectivity/drivers/wifi/COMPONENT_WHD/whd-bsp-integration/cy_network_buffer.c
+@@ -26,6 +26,7 @@
+ #include <stdlib.h>
+ #include "cy_network_buffer.h"
+ #include "cy_utils.h"
++#include "cyhal.h"
+ #include "cyhal_system.h"
+ #include "lwip/pbuf.h"
+ #include "lwip/memp.h"
+diff --git a/connectivity/drivers/wifi/COMPONENT_WHD/wifi-host-driver/src/bus_protocols/whd_bus_common.c b/connectivity/drivers/wifi/COMPONENT_WHD/wifi-host-driver/src/bus_protocols/whd_bus_common.c
+index 48c401a0a0..4eacf4869a 100755
+--- a/connectivity/drivers/wifi/COMPONENT_WHD/wifi-host-driver/src/bus_protocols/whd_bus_common.c
++++ b/connectivity/drivers/wifi/COMPONENT_WHD/wifi-host-driver/src/bus_protocols/whd_bus_common.c
+@@ -179,7 +179,7 @@ static whd_result_t whd_bus_common_download_resource(whd_driver_t whd_driver, wh
+             uint32_t tmp;
+ 
+             /* verify reset instruction value */
+-            result = whd_bus_read_backplane_value(whd_driver, 0, sizeof(tmp), (uint32_t *)&tmp);
++            result = whd_bus_read_backplane_value(whd_driver, 0, sizeof(tmp), (uint8_t *)&tmp);
+ 
+             if ( (result == WHD_SUCCESS) && (tmp != reset_instr) )
+             {
+diff --git a/connectivity/drivers/wifi/COMPONENT_WHD/wifi-host-driver/src/whd_wifi_api.c b/connectivity/drivers/wifi/COMPONENT_WHD/wifi-host-driver/src/whd_wifi_api.c
+index 8a8f411ef9..b856be69fb 100755
+--- a/connectivity/drivers/wifi/COMPONENT_WHD/wifi-host-driver/src/whd_wifi_api.c
++++ b/connectivity/drivers/wifi/COMPONENT_WHD/wifi-host-driver/src/whd_wifi_api.c
+@@ -294,7 +294,7 @@ static const uint16_t mcs_data_rate_lookup_table[32][2][2] =
+     },
+ };
+ 
+-static whd_wifi_join_timeout = DEFAULT_JOIN_ATTEMPT_TIMEOUT;
++static uint32_t whd_wifi_join_timeout = DEFAULT_JOIN_ATTEMPT_TIMEOUT;
+ 
+ 
+ /******************************************************
+diff --git a/targets/TARGET_STM/TARGET_STM32H7/analogin_device.c b/targets/TARGET_STM/TARGET_STM32H7/analogin_device.c
+index 8b617e307a..f105c617d1 100644
+--- a/targets/TARGET_STM/TARGET_STM32H7/analogin_device.c
++++ b/targets/TARGET_STM/TARGET_STM32H7/analogin_device.c
+@@ -19,6 +19,7 @@
+ #if DEVICE_ANALOGIN
+ 
+ #include "mbed_wait_api.h"
++#include "mbed_critical.h"
+ #include "cmsis.h"
+ #include "pinmap.h"
+ #include "mbed_error.h"
