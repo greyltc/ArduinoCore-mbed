@@ -18,6 +18,9 @@
       "nsapi.dns-response-wait-time": 5000,
       "nsapi.dns-total-attempts": 3,
       "lwip.raw-socket-enabled": true,
+      "stm32-emac.eth-phy-AutoNegotiation": "ETH_AUTONEGOTIATION_DISABLE",
+      "stm32-emac.eth-phy-DuplexMode": "ETH_MODE_HALFDUPLEX",
+      "stm32-emac.eth-phy-Speed": "ETH_SPEED_10M",
       "target.macros_add": [
         "BT_UART_NO_3M_SUPPORT",
         "USB_DYNAMIC_CONFIGURATION",
