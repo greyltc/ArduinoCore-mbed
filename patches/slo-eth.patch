@@ -1,0 +1,22 @@
+diff --git a/targets/TARGET_STM/TARGET_STM32H7/STM32Cube_FW/STM32H7xx_HAL_Driver/stm32h7xx_hal_eth.c b/targets/TARGET_STM/TARGET_STM32H7/STM32Cube_FW/STM32H7xx_HAL_Driver/stm32h7xx_hal_eth.c
+index df797092fc..13eb82417d 100644
+--- a/targets/TARGET_STM/TARGET_STM32H7/STM32Cube_FW/STM32H7xx_HAL_Driver/stm32h7xx_hal_eth.c
++++ b/targets/TARGET_STM/TARGET_STM32H7/STM32Cube_FW/STM32H7xx_HAL_Driver/stm32h7xx_hal_eth.c
+@@ -2534,7 +2534,7 @@ static void ETH_MACDMAConfig(ETH_HandleTypeDef *heth)
+   macDefaultConf.CRCStripTypePacket = ENABLE;
+   macDefaultConf.DeferralCheck = DISABLE;
+   macDefaultConf.DropTCPIPChecksumErrorPacket = ENABLE;
+-  macDefaultConf.DuplexMode = ETH_FULLDUPLEX_MODE;
++  macDefaultConf.DuplexMode = ETH_HALFDUPLEX_MODE;
+   macDefaultConf.ExtendedInterPacketGap = DISABLE;
+   macDefaultConf.ExtendedInterPacketGapVal = 0x0;
+   macDefaultConf.ForwardRxErrorPacket = DISABLE;
+@@ -2555,7 +2555,7 @@ static void ETH_MACDMAConfig(ETH_HandleTypeDef *heth)
+   macDefaultConf.RetryTransmission = ENABLE;
+   macDefaultConf.SlowProtocolDetect = DISABLE;
+   macDefaultConf.SourceAddrControl = ETH_SOURCEADDRESS_REPLACE_ADDR0;
+-  macDefaultConf.Speed = ETH_SPEED_100M;
++  macDefaultConf.Speed = ETH_SPEED_10M;
+   macDefaultConf.Support2KPacket = DISABLE;
+   macDefaultConf.TransmitQueueMode = ETH_TRANSMITSTOREFORWARD;
+   macDefaultConf.TransmitFlowControl = DISABLE;

@@ -1,0 +1,1 @@
+bash mbed-os-to-arduino -a -g PORTENTA_H7_M7:PORTENTA_H7_M7
