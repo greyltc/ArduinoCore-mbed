@@ -334,12 +334,12 @@
 #define MBED_CONF_SARA4_PPP_BAUDRATE                                            115200                                                                                           // set by library:SARA4_PPP
 #define MBED_CONF_SARA4_PPP_PROVIDE_DEFAULT                                     0                                                                                                // set by library:SARA4_PPP
 #define MBED_CONF_STM32_EMAC_ETH_PHY_ADDRESS                                    0                                                                                                // set by library:stm32-emac
-#define MBED_CONF_STM32_EMAC_ETH_PHY_AUTONEGOTIATION                            ETH_AUTONEGOTIATION_DISABLE                                                                      // set by application[*]
-#define MBED_CONF_STM32_EMAC_ETH_PHY_DUPLEXMODE                                 ETH_MODE_HALFDUPLEX                                                                              // set by application[*]
+#define MBED_CONF_STM32_EMAC_ETH_PHY_AUTONEGOTIATION                            ETH_AUTONEGOTIATION_ENABLE                                                                       // set by library:stm32-emac
+#define MBED_CONF_STM32_EMAC_ETH_PHY_DUPLEXMODE                                 ETH_MODE_FULLDUPLEX                                                                              // set by library:stm32-emac
 #define MBED_CONF_STM32_EMAC_ETH_PHY_DUPLEX_STATUS                              0x0010                                                                                           // set by library:stm32-emac
 #define MBED_CONF_STM32_EMAC_ETH_PHY_MEDIA_INTERFACE                            ETH_MEDIA_INTERFACE_RMII                                                                         // set by library:stm32-emac
 #define MBED_CONF_STM32_EMAC_ETH_PHY_RESET_DELAY                                500                                                                                              // set by library:stm32-emac
-#define MBED_CONF_STM32_EMAC_ETH_PHY_SPEED                                      ETH_SPEED_10M                                                                                    // set by application[*]
+#define MBED_CONF_STM32_EMAC_ETH_PHY_SPEED                                      ETH_SPEED_100M                                                                                   // set by library:stm32-emac
 #define MBED_CONF_STM32_EMAC_ETH_PHY_SPEED_STATUS                               0x0004                                                                                           // set by library:stm32-emac
 #define MBED_CONF_STM32_EMAC_ETH_PHY_STATUS_REGISTER                            31                                                                                               // set by library:stm32-emac
 #define MBED_CONF_STM32_EMAC_ETH_RXBUFNB                                        4                                                                                                // set by library:stm32-emac
