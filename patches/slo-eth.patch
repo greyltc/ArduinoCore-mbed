@@ -1,14 +1,41 @@
+diff --git a/connectivity/drivers/emac/TARGET_STM/TARGET_STM32H7/lan8742/lan8742.c b/connectivity/drivers/emac/TARGET_STM/TARGET_STM32H7/lan8742/lan8742.c
+index 0fd341cdc4..8525bdad4b 100644
+--- a/connectivity/drivers/emac/TARGET_STM/TARGET_STM32H7/lan8742/lan8742.c
++++ b/connectivity/drivers/emac/TARGET_STM/TARGET_STM32H7/lan8742/lan8742.c
+@@ -371,6 +371,8 @@ int32_t LAN8742_SetLinkState(lan8742_Object_t *pObj, uint32_t LinkState)
+             bcrvalue |= LAN8742_BCR_SPEED_SELECT;
+         } else if (LinkState == LAN8742_STATUS_10MBITS_FULLDUPLEX) {
+             bcrvalue |= LAN8742_BCR_DUPLEX_MODE;
++        } else if (LinkState == LAN8742_STATUS_10MBITS_HALFDUPLEX) {
++            status = LAN8742_STATUS_OK;
+         } else {
+             /* Wrong link status parameter */
+             status = LAN8742_STATUS_ERROR;
 diff --git a/connectivity/drivers/emac/TARGET_STM/stm32xx_emac.cpp b/connectivity/drivers/emac/TARGET_STM/stm32xx_emac.cpp
-index 0e7d64ad34..686cf69122 100644
+index 0e7d64ad34..8cfb523643 100644
 --- a/connectivity/drivers/emac/TARGET_STM/stm32xx_emac.cpp
 +++ b/connectivity/drivers/emac/TARGET_STM/stm32xx_emac.cpp
-@@ -157,6 +157,9 @@ bool _phy_init()
+@@ -154,11 +154,22 @@ MBED_WEAK void STM_HAL_ETH_Handler(ETH_HandleTypeDef *heth);
+ #ifdef ETH_IP_VERSION_V2
+ bool _phy_init()
+ {
++    bool status_ok;
++
      /* Set PHY IO functions */
      LAN8742_RegisterBusIO(&LAN8742, &LAN8742_IOCtx);
  
-+    /* slo-eth */
 +    LAN8742_SetLinkState(&LAN8742, LAN8742_STATUS_10MBITS_HALFDUPLEX);
 +
      /* Initialize the LAN8742 ETH PHY */
-     return LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
+-    return LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
++    status_ok = LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
++
++    if (status_ok){
++        /* slo-eth */
++        status_ok = LAN8742_SetLinkState(&LAN8742, LAN8742_STATUS_10MBITS_HALFDUPLEX) == LAN8742_STATUS_OK;
++    }
++
++    return status_ok;
  }
+ 
+ int32_t _phy_get_state()
